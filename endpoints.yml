@@ -4,6 +4,3 @@ action_endpoint:
 tracker_store:
   type: mongod
   url: ${MONGO_URI}
-  db: rasa
-  username: ${MONGO_USER}
-  password: ${MONGO_PASS}
