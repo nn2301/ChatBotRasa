@@ -1,0 +1,10 @@
+# Dockerfile.rasa
+FROM rasa/rasa:3.6.0
+WORKDIR /app
+COPY . /app
+# Nếu muốn train trong lúc build, bỏ comment:
+# RUN rasa train --fixed-model-name model
+EXPOSE 8080
+ENV PORT=8080
+# Cho phép CORS từ domain web của bạn
+CMD ["run", "--enable-api", "--cors", "https://styleforyou.online,https://www.styleforyou.online", "--port", "8080"]

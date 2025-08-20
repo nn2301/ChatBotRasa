@@ -1,0 +1,9 @@
+# Dockerfile.actions
+FROM rasa/rasa-sdk:3.6.0
+WORKDIR /app
+COPY actions/ /app/actions
+# Nếu actions có requirements:
+# COPY actions/requirements.txt /app/actions/requirements.txt
+# RUN pip install -r /app/actions/requirements.txt
+EXPOSE 8080
+CMD ["start", "--actions", "actions", "--port", "8080"]

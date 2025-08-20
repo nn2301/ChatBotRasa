@@ -1,17 +1,23 @@
+# Python
+venv*/
+.venv/
+env/
+venv310/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-venv*/
-.venv*/
-env*/
-ENV*/
-.rasa/
 *.log
-logs/
-results/
-.tmp/
+*.egg-info/
+.pytest_cache/
+
+# Secrets
+.env
+.env.*
+
+# IDE
 .vscode/
 .idea/
-Thumbs.db
-.DS_Store
+
+# Rasa models (nếu build cục bộ)
+models/
