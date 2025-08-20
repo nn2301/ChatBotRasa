@@ -1,0 +1,59 @@
+version: "3.1"
+stories:
+
+- story: test greet then happy
+  steps:
+    - user: |
+        xin chào
+      intent: greet
+    - action: utter_greet
+    - user: |
+        tuyệt vời
+      intent: mood_great
+    - action: utter_happy
+
+- story: test greet then unhappy but better
+  steps:
+    - user: |
+        chào bạn
+      intent: greet
+    - action: utter_greet
+    - user: |
+        buồn quá
+      intent: mood_unhappy
+    - action: utter_cheer_up
+    - action: utter_did_that_help
+    - user: |
+        có
+      intent: affirm
+    - action: utter_happy
+
+- story: test greet then unhappy still sad
+  steps:
+    - user: |
+        hello
+      intent: greet
+    - action: utter_greet
+    - user: |
+        mệt mỏi
+      intent: mood_unhappy
+    - action: utter_cheer_up
+    - action: utter_did_that_help
+    - user: |
+        không
+      intent: deny
+    - action: utter_goodbye
+
+- story: test goodbye
+  steps:
+    - user: |
+        tạm biệt
+      intent: goodbye
+    - action: utter_goodbye
+
+- story: test bot challenge
+  steps:
+    - user: |
+        bạn có phải là bot không?
+      intent: bot_challenge
+    - action: utter_iamabot

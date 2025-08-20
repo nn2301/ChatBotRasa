@@ -1,0 +1,120 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - ask_payment_methods
+  - ask_shipping_methods
+  - ask_contact_info
+  - ask_about_us
+  - search_products
+  - show_more_products
+
+entities:
+  - name
+  - color
+  - size
+  - priceRange
+  - id_cate
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  color:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: color
+
+  size:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: size
+
+  priceRange:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: priceRange
+
+  id_cate:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: id_cate
+
+  matched_products:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  product_offset:
+    type: float
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  suggested_entity:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  suggested_value:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Chào bạn! Mình có thể giúp gì cho bạn hôm nay?"
+
+  utter_goodbye:
+    - text: "Tạm biệt! Hẹn gặp lại bạn lần sau."
+
+  utter_iamabot:
+    - text: "Mình là chatbot được tạo ra để hỗ trợ bạn về thời trang và mua sắm."
+
+  utter_ask_payment_methods:
+    - text: "Bạn có thể thanh toán qua chuyển khoản, thẻ ngân hàng, ví điện tử hoặc khi nhận hàng (COD)."
+
+  utter_ask_shipping_methods:
+    - text: "Shop hỗ trợ giao hàng tiêu chuẩn và giao hàng nhanh qua nhiều đối tác uy tín."
+
+  utter_ask_contact_info:
+    - text: "Bạn có thể liên hệ với shop qua số 0123 456 789 hoặc email support@styleforyou.vn."
+
+  utter_ask_about_us:
+    - text: "Style For You chuyên về thời trang streetwear local brand dành cho giới trẻ năng động và cá tính."
+
+  utter_ask_show_more:
+    - text: "Bạn có muốn xem thêm sản phẩm không?"
+
+  utter_goodbye_after_deny:
+    - text: "Cảm ơn bạn đã ghé thăm shop nha! Nếu cần thêm gì thì cứ hỏi nhé."
+
+actions:
+  - action_reset_search_slots
+  - action_search_products
+  - action_accept_suggestion
+  - action_suggest_more_products
+  - action_show_more_products
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

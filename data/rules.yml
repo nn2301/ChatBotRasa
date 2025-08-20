@@ -1,0 +1,58 @@
+version: "3.1"
+
+rules:
+  - rule: Reset slots before search
+    steps:
+      - intent: search_products
+      - action: action_reset_search_slots
+      - action: action_search_products
+
+  - rule: Greet user
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: User says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Ask about payment methods
+    steps:
+      - intent: ask_payment_methods
+      - action: utter_ask_payment_methods
+
+  - rule: Ask about shipping methods
+    steps:
+      - intent: ask_shipping_methods
+      - action: utter_ask_shipping_methods
+
+  - rule: Ask about contact information
+    steps:
+      - intent: ask_contact_info
+      - action: utter_ask_contact_info
+
+  - rule: Ask about shop info
+    steps:
+      - intent: ask_about_us
+      - action: utter_ask_about_us
+
+  - rule: User wants to see more products
+    steps:
+      - intent: show_more_products
+      - action: action_show_more_products
+
+  - rule: Người dùng đồng ý với gợi ý (affirm)
+    steps:
+      - intent: affirm
+      - action: action_accept_suggestion
+  
+  - rule: Người dùng từ chối gợi ý (deny)
+    steps:
+      - intent: deny
+      - action: action_suggest_more_products

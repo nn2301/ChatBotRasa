@@ -1,0 +1,293 @@
+version: "3.1"
+nlu:
+  - intent: greet
+    examples: |
+      - xin chào
+      - xin chào bạn
+      - chào
+      - chào bạn
+      - chào cậu
+      - hello
+      - hi
+      - chào nha
+      - ê bạn
+      - alo
+      - hello bạn ơi
+      - cho mình hỏi chút
+      - mình muốn hỏi
+      - mình cần giúp
+      - bạn ơi
+
+  - intent: affirm
+    examples: |
+      - đúng rồi
+      - chính xác
+      - đúng vậy
+      - hoàn toàn đúng
+      - tất nhiên rồi
+      - chắc chắn
+      - khá hơn rồi
+      - tôi cảm thấy khá hơn rồi
+      - ok
+      - okay
+      - ừ
+      - vâng
+      - ừm
+
+  - intent: deny
+    examples: |
+      - không
+      - không đâu
+      - không cần đâu
+      - tôi nghĩ là không cần đâu
+      - chưa đâu
+      - không phải
+      - không hẳn
+
+  - intent: goodbye
+    examples: |
+      - tạm biệt
+      - chào tạm biệt
+      - bye
+      - hẹn gặp lại
+      - tôi đi đây
+      - chúc bạn một ngày tốt lành
+      - thôi nhé
+      - gặp lại sau
+      - tạm biệt nhé
+      - chào nhé
+
+  - intent: bot_challenge
+    examples: |
+      - bạn có phải là bot không?
+      - bạn là người à?
+      - ai tạo ra bạn?
+      - bạn có thật không?
+      - bạn là trí tuệ nhân tạo à?
+      - bạn là chatbot à?
+      - bạn có cảm xúc không?
+      - ai lập trình bạn vậy?
+      - bạn được huấn luyện từ đâu?
+      - bạn có thể làm gì?
+
+  - intent: ask_payment_methods
+    examples: |
+      - tôi có thể thanh toán bằng những phương thức nào?
+      - có hỗ trợ thanh toán qua ví điện tử không?
+      - thanh toán bằng vnpay được không?
+      - shop có hỗ trợ momo không?
+      - có thể trả tiền khi nhận hàng không?
+
+  - intent: ask_shipping_methods
+    examples: |
+      - shop có giao hàng nhanh không?
+      - giao hàng mất bao lâu?
+      - có giao hàng tiêu chuẩn không?
+      - shop giao hàng trong mấy ngày?
+      - có những hình thức giao hàng nào?
+
+  - intent: ask_contact_info
+    examples: |
+      - làm sao để liên hệ với shop?
+      - số điện thoại của shop là gì?
+      - email của shop là gì?
+      - địa chỉ cửa hàng là gì?
+      - mình muốn hỏi thông tin liên hệ
+
+  - intent: ask_about_us
+    examples: |
+      - shop bạn bán gì vậy?
+      - shop4real là gì?
+      - shop theo phong cách nào?
+      - thời trang ở đây có gì đặc biệt?
+      - phong cách thời trang của shop như thế nào?
+
+  - intent: search_products
+    examples: |
+      - cho mình vài mẫu [quần jean](name) đẹp nhé
+      - cho mình vài mẫu [áo bomber](name) đẹp nhé
+      - cho mình vài mẫu [áo croptop](name) đẹp nhé
+      - cho mình vài mẫu [áo nỉ](name) đẹp nhé
+      - cho mình vài mẫu [đồ thể thao](name) đẹp nhé
+      - cho mình xem vài mẫu size [m](size) màu [trắng](color)
+      - cho mình xem vài mẫu size [m](size) màu [xanh](color)
+      - cho mình xem vài mẫu size [m](size) màu [đen](color)
+      - cho mình xem vài mẫu size [s](size) màu [hồng](color)
+      - cho mình xem vài mẫu size [s](size) màu [tím](color)
+      - cho mình xin vài mẫu [váy dài](name) màu [nâu](color)
+      - cho mình xin vài mẫu [áo bomber](name) màu [xám](color)
+      - cho mình xin vài mẫu [áo sơ mi](name) màu [nâu](color)
+      - còn [quần jean](name) nào giá [1m-2m](priceRange) không?
+      - còn [váy dài](name) nào giá [2m-4m](priceRange) không?
+      - còn [áo bomber](name) nào giá [2m-4m](priceRange) không?
+      - còn [áo hoodie](name) nào giá [over-4m](priceRange) không?
+      - còn [áo len](name) nào giá [500k-1m](priceRange) không?
+      - còn [áo polo](name) nào giá [under-500k](priceRange) không?
+      - có [áo bomber](name) nào giá từ [under-500k](priceRange) không?
+      - có [áo hoodie](name) mùa đông không?
+      - có [áo khoác](name) nào giá từ [1m-2m](priceRange) không?
+      - có [áo khoác](name) nào mới không shop?
+      - có [áo len](name) nào mới không shop?
+      - có [áo polo](name) nào mới không shop?
+      - có [đồ thể thao](name) nào mới không shop?
+      - cần mua [váy dài](name) cho nữ màu [trắng](color)
+      - cần mua [áo bomber](name) cho nữ màu [hồng](color)
+      - cần mua [áo nỉ](name) cho nữ màu [xám](color)
+      - cần mua [áo polo](name) cho nữ màu [đen](color)
+      - gợi ý vài mẫu [áo bomber](name) tầm giá [1m-2m](priceRange)
+      - gợi ý vài mẫu [áo croptop](name) tầm giá [1m-2m](priceRange)
+      - gợi ý vài mẫu [áo len](name) tầm giá [2m-4m](priceRange)
+      - gợi ý vài mẫu [áo phông](name) tầm giá [under-500k](priceRange)
+      - gợi ý vài mẫu [áo sơ mi](name) tầm giá [over-4m](priceRange)
+      - gợi ý vài mẫu [áo thun](name) tầm giá [500k-1m](priceRange)
+      - mình cần [váy dài](name) màu [be](color)
+      - mình cần [áo croptop](name) màu [nâu](color)
+      - mình cần [áo nỉ](name) màu [đỏ](color)
+      - mình cần [áo polo](name) màu [be](color)
+      - mình cần tìm [quần jean](name) mùa hè
+      - mình cần tìm [áo khoác](name) mùa hè
+      - mình muốn mua [váy](name) giá [500k-1m](priceRange)
+      - mình muốn mua [áo croptop](name) giá [under-500k](priceRange)
+      - mình muốn mua [áo hoodie](name) giá [2m-4m](priceRange)
+      - mình muốn mua [áo phông](name) giá [1m-2m](priceRange)
+      - mình muốn mua [áo sơ mi](name) giá [2m-4m](priceRange)
+      - mình muốn xem hàng màu [be](color) size [l](size)
+      - mình muốn xem hàng màu [tím](color) size [l](size)
+      - mình muốn xem hàng màu [xanh](color) size [m](size)
+      - mình muốn xem hàng màu [xám](color) size [m](size)
+      - mình đang tìm sản phẩm [quần jean](name) giá [2m-4m](priceRange)
+      - mình đang tìm sản phẩm [váy dài](name) giá [over-4m](priceRange)
+      - mình đang tìm sản phẩm [áo croptop](name) giá [2m-4m](priceRange)
+      - mình đang tìm sản phẩm [áo nỉ](name) giá [under-500k](priceRange)
+      - mình đang tìm sản phẩm [áo polo](name) giá [under-500k](priceRange)
+      - mình cần áo khoác giá [dưới 500k](priceRange)
+      - shop còn bán [quần jean](name) không?
+      - shop còn bán [áo croptop](name) không?
+      - shop còn bán [áo sơ mi](name) không?
+      - shop có [váy dài](name) không?
+      - shop có [áo hoodie](name) không?
+      - shop có [áo nỉ](name) không?
+      - tìm [váy](name) tầm giá [under-500k](priceRange) nha
+      - tìm [áo hoodie](name) tầm giá [over-4m](priceRange) nha
+      - tìm [áo khoác](name) tầm giá [1m-2m](priceRange) nha
+      - tìm [áo len](name) tầm giá [500k-1m](priceRange) nha
+      - tìm [áo nỉ](name) tầm giá [1m-2m](priceRange) nha
+      - tìm [áo thun](name) tầm giá [over-4m](priceRange) nha
+      - tìm [đồ thể thao](name) tầm giá [2m-4m](priceRange) nha
+      - tìm giúp mình [váy](name) màu [đỏ](color) size [m](size)
+      - tìm giúp mình [áo len](name) màu [hồng](color) size [xl](size)
+      - tìm giúp mình [áo nỉ](name) màu [xám](color) size [m](size)
+      - tìm giúp mình [áo polo](name) màu [hồng](color) size [xl](size)
+      - tìm giúp mình [áo sơ mi](name) màu [đỏ](color) size [xl](size)
+      - tìm giúp mình [đồ thể thao](name) màu [tím](color) size [l](size)
+      - tìm giúp mình [đồ thể thao](name) màu [xám](color) size [m](size)
+      - tìm hàng [váy](name) cho size [m](size)
+      - tư vấn giúp mình [áo nỉ](name) màu [be](color) size [m](size)
+      - tôi muốn tìm [áo](name) màu [đen](color)
+      - tìm [áo khoác](name) màu [đen](color)
+      - tìm [áo sơ mi](name) màu [đen](color)
+      - tìm [áo phông](name) màu [đen](color)
+      - mình cần [áo nỉ](name) màu [đen](color)
+      - gợi ý [áo bomber](name) màu [đen](color)
+      - tìm giúp mình [áo](name) màu [đen](color) size [m](size)
+      - tìm giúp mình [áo khoác](name) màu [đen](color) size [l](size)
+      - tôi muốn mua [áo](name)
+      - tìm [áo khoác](name) đẹp nhé
+      - gợi ý [áo sơ mi](name) mới
+      - mình cần tìm [áo phông](name)
+      # Thêm ví dụ đa dạng hơn cho màu đen
+      - tôi muốn tìm [áo phông](name) màu [đen](color)
+      - tôi cần mua [áo](name) màu [đen](color)
+      - tìm giúp tôi [áo sơ mi](name) màu [đen](color)
+      - cho tôi xem [áo nỉ](name) màu [đen](color)
+      - tôi muốn áo [áo bomber](name) màu [đen](color)
+      - tìm [áo](name) màu [đen](color) đẹp nhé
+      - mình đang tìm [áo khoác](name) màu [đen](color)
+
+  - intent: show_more_products
+    examples: |
+      - có
+      - có nha
+      - cho mình xem thêm
+      - xem thêm đi
+      - tiếp tục
+      - hiện thêm sản phẩm
+      - mình muốn xem thêm
+      - có sản phẩm nào nữa không?
+      - có thêm không?
+      - đưa mình thêm vài cái nữa
+      - còn hàng nào nữa không?
+
+  - lookup: priceRange
+    examples: |
+      - under-500k
+      - dưới 500k
+      - dưới 500.000đ
+      - 500k-1m
+      - khoảng 500k tới 1m
+      - khoảng 500.000 tới 1tr
+      - 1m-2m
+      - khoảng 1m tới 2m
+      - khoảng 1tr tới 2tr
+      - 2m-4m
+      - over-4m
+      - từ 500k đến 1 triệu
+      - khoảng 1 triệu đến 2 triệu
+      - 2 triệu tới 4 triệu
+      - trên 4 triệu
+
+  - lookup: color
+    examples: |
+      - đen
+      - trắng
+      - xanh
+      - hồng
+      - tím
+      - nâu
+      - xám
+      - đỏ
+      - be
+
+  - synonym: under-500k
+    examples: |
+      - dưới 500k
+      - dưới 500 nghìn
+      - dưới năm trăm ngàn
+
+  - synonym: 500k-1m
+    examples: |
+      - từ 500k đến 1 triệu
+      - 500k đến 1tr
+      - 500 nghìn tới 1 triệu
+
+  - synonym: 1m-2m
+    examples: |
+      - 1 triệu đến 2 triệu
+      - 1tr - 2tr
+      - 1tr-2tr
+      - 1 tr - 2 tr
+      - 1tr đến 2tr
+      - 1 tr đến 2 tr
+      - một triệu tới hai triệu
+      - khoảng 1m-2m
+
+  - synonym: 2m-4m
+    examples: |
+      - từ 2 triệu đến 4 triệu
+      - 2 triệu tới 4 triệu
+      - 2tr - 4tr
+      - 2tr-4tr
+      - 2 tr - 4 tr
+      - 2tr đến 4tr
+      - 2 tr đến 4 tr
+      - khoảng giá 2m-4m
+
+  - synonym: over-4m
+    examples: |
+      - trên 4 triệu
+      - trên 4 tr
+      - trên 4tr
+      - hơn 4 triệu
+      - từ 4 triệu trở lên
+      - từ 4 tr trở lên
+      - từ 4tr trở lên
