@@ -1,8 +1,6 @@
 FROM rasa/rasa:3.6.0
 WORKDIR /app
 COPY . /app
-
 EXPOSE 8080
 ENV PORT=8080
-
-CMD ["run", "--enable-api", "--cors", "https://styleforyou.online,https://www.styleforyou.online", "--port", "8080"]
+CMD ["run","--enable-api","--cors","https://styleforyou.online,https://www.styleforyou.online","--port","8080"]
