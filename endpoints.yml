@@ -1,6 +1,11 @@
 tracker_store:
-  type: mongod
+  type: mongo
   url: ${MONGO_URI}
+  db: rasa
+  collection: conversations
+  login_db: admin
 
+# Nếu KHÔNG có custom actions, xóa block này.
+# Nếu có, giữ nguyên và set ACTIONS_URL trong ENV như trên.
 action_endpoint:
   url: ${ACTIONS_URL}/webhook
