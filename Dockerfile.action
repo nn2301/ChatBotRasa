@@ -1,8 +1,17 @@
+# Dockerfile.action
 FROM rasa/rasa-sdk:3.6.2
+
 WORKDIR /app
+
+# copy code actions
 COPY actions/ /app/actions
-# Nếu có requirements cho actions:
-# COPY requirements.txt /app/requirements.txt
-# RUN pip install -r /app/requirements.txt
+
+# nếu actions dùng thư viện ngoài (pymongo, requests...)
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
+
+# mở đúng cổng mà Render sẽ check
 EXPOSE 8080
-CMD ["start","--actions","actions","--port","8080"]
+
+# chạy action server trên cổng 8080
+CMD ["start", "--actions", "actions", "--port", "8080"]
