@@ -1,5 +1,11 @@
 FROM rasa/rasa:3.6.0
 WORKDIR /app
 COPY . /app
+
 EXPOSE 8080
-CMD bash -lc 'rasa run --enable-api --host 0.0.0.0 --port "${PORT:-8080}" --cors "${CORS_ORIGINS:-*}"'
+
+# Quan trọng: bỏ ENTRYPOINT mặc định ["rasa"] của base image
+ENTRYPOINT []
+
+# Dùng shell để expand $PORT và $CORS_ORIGINS khi chạy trên Render
+CMD ["/bin/bash","-lc","rasa run --enable-api --host 0.0.0.0 --port ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\""]
