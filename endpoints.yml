@@ -1,7 +1,7 @@
 tracker_store:
   type: mongod
   url: ${MONGO_URI}
-  db: DB_GraduationProject
+  db: ${MONGO_DB}
   username: ${MONGO_USER}
   password: ${MONGO_PASS}
 action_endpoint:

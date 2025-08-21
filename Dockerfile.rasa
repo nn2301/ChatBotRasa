@@ -1,24 +1,14 @@
+# Sử dụng image Rasa chính thức
 FROM rasa/rasa:3.6.0
 
+# Đặt thư mục làm việc
 WORKDIR /app
+
+# Copy toàn bộ project (kể cả models/)
 COPY . /app
 
-# Train luôn trong lúc build để chắc chắn có model
-RUN rasa train --fixed-model-name model
-
-# Tắt telemetry cho gọn log
-ENV RASA_TELEMETRY_ENABLED=false
-
-# Render sẽ ping cổng trong biến môi trường PORT, đừng hard-code 8080
+# Expose port (Rasa mặc định 5005, nhưng bạn có thể dùng 8080)
 EXPOSE 8080
 
-# Dùng shell form để expand ${PORT} và nhận CORS/Actions từ ENV của Render
-CMD bash -lc "\
-  rasa run \
-    --enable-api \
-    --cors \"${CORS_ORIGINS:-*}\" \
-    --port \"${PORT:-8080}\" \
-    --endpoints endpoints.yml \
-    --credentials credentials.yml \
-    --model /app/models/model.tar.gz \
-"
+# Lệnh chạy Rasa server
+CMD ["run", "--enable-api", "--cors", "*", "--host", "0.0.0.0", "--port", "8080"]
