@@ -1,17 +1,22 @@
 # Dockerfile.action
 FROM rasa/rasa-sdk:3.6.2
 
+# Cần quyền root để cài packages
+USER root
+
 WORKDIR /app
 
-# copy code actions
+# Cài dependencies cho actions
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copy code actions
 COPY actions/ /app/actions
 
-# nếu actions dùng thư viện ngoài (pymongo, requests...)
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
-
-# mở đúng cổng mà Render sẽ check
+# Mở port và chạy server
 EXPOSE 8080
 
-# chạy action server trên cổng 8080
+# Trả lại user không đặc quyền (như image gốc dùng)
+USER 1001
+
 CMD ["start", "--actions", "actions", "--port", "8080"]
