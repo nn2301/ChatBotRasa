@@ -3,8 +3,7 @@ WORKDIR /app
 COPY . /app
 
 EXPOSE 8080
-
-# Xóa ENTRYPOINT mặc định ["rasa"] của base image để chạy lệnh đầy đủ
 ENTRYPOINT []
 
-CMD ["/bin/bash","-lc","rasa run --enable-api -i 0.0.0.0 -p ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\""]
+# Rasa sẽ tự chọn file .tar.gz mới nhất trong /app/models
+CMD ["/bin/bash","-lc","rasa run --enable-api --credentials credentials.yml --endpoints endpoints.yml --model models -i 0.0.0.0 -p ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\""]
