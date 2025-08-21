@@ -4,7 +4,6 @@ COPY . /app
 
 EXPOSE 8080
 
-# Xóa ENTRYPOINT mặc định ["rasa"] của base image để chạy lệnh đầy đủ
 ENTRYPOINT []
 
-CMD ["/bin/bash","-lc","rasa run --enable-api -i 0.0.0.0 -p ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\""]
+CMD ["/bin/bash","-lc","rasa run --enable-api -i 0.0.0.0 -p ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\" --endpoints endpoints.yml"]
