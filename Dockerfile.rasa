@@ -5,5 +5,18 @@ COPY . /app
 EXPOSE 8080
 ENTRYPOINT []
 
-# Rasa sẽ tự chọn file .tar.gz mới nhất trong /app/models
-CMD ["/bin/bash","-lc","rasa run --enable-api --credentials credentials.yml --endpoints endpoints.yml --model models -i 0.0.0.0 -p ${PORT:-8080} --cors \"${CORS_ORIGINS:-*}\""]
+# Liệt kê và kiểm tra models trước khi chạy Rasa
+CMD ["/bin/bash","-lc", "\
+  echo '--- Runtime: listing /app/models'; ls -lah /app/models || true; \
+  if ! ls /app/models/*.tar.gz >/dev/null 2>&1; then \
+    echo 'ERROR: No model .tar.gz found in /app/models'; exit 1; \
+  fi; \
+  echo 'Will use latest model from /app/models'; \
+  rasa run \
+    --enable-api \
+    --credentials credentials.yml \
+    --endpoints endpoints.yml \
+    --model models \
+    -i 0.0.0.0 -p ${PORT:-8080} \
+    --cors \"${CORS_ORIGINS:-*}\" \
+"]
