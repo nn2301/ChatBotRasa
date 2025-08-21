@@ -1,14 +1,5 @@
-# Sử dụng image Rasa chính thức
 FROM rasa/rasa:3.6.0
-
-# Đặt thư mục làm việc
 WORKDIR /app
-
-# Copy toàn bộ project (kể cả models/)
 COPY . /app
-
-# Expose port (Rasa mặc định 5005, nhưng bạn có thể dùng 8080)
 EXPOSE 8080
-
-# Lệnh chạy Rasa server
-CMD ["run", "--enable-api", "--cors", "*", "--host", "0.0.0.0", "--port", "8080"]
+CMD bash -lc 'rasa run --enable-api --host 0.0.0.0 --port "${PORT:-8080}" --cors "${CORS_ORIGINS:-*}"'

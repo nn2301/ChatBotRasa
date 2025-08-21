@@ -1,8 +1,6 @@
 tracker_store:
   type: mongod
   url: ${MONGO_URI}
-  db: ${MONGO_DB}
-  username: ${MONGO_USER}
-  password: ${MONGO_PASS}
+
 action_endpoint:
   url: ${ACTIONS_URL}/webhook
