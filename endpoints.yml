@@ -1,7 +1,7 @@
 tracker_store:
   type: mongo
   url: ${MONGO_URI}
-  db: rasa
+  db: DuAnTotNghiep
   collection: conversations
   login_db: admin
 
