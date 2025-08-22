@@ -5,17 +5,26 @@ COPY . /app
 EXPOSE 8080
 ENTRYPOINT []
 
-# Liệt kê models để debug, fail sớm nếu không có .tar.gz
-CMD ["/bin/bash","-lc", "\
-  echo '--- Listing /app/models'; ls -lah /app/models || true; \
+# Tuỳ chọn: chỉ định model cụ thể qua build-arg hoặc env
+#   docker build --build-arg MODEL_FILE=models/20250722-211715-ivory-valance.tar.gz -t yourimg .
+ARG MODEL_FILE=
+ENV MODEL_FILE=${MODEL_FILE}
+
+# Start command
+CMD ["/bin/bash","-lc","\
+  set -euo pipefail; \
+  echo '--- Listing /app/models'; \
+  ls -lah /app/models || true; \
   if ! ls /app/models/*.tar.gz >/dev/null 2>&1; then \
     echo 'ERROR: No model .tar.gz found in /app/models'; exit 1; \
   fi; \
+  MODEL_TO_LOAD=${MODEL_FILE:-$(ls -1t /app/models/*.tar.gz | head -n1)}; \
+  echo Using model: $MODEL_TO_LOAD; \
   rasa run \
     --enable-api \
     --credentials credentials.yml \
     --endpoints endpoints.yml \
-    --model models \
+    --model \"$MODEL_TO_LOAD\" \
     -i 0.0.0.0 -p ${PORT:-8080} \
     --cors \"${CORS_ORIGINS:-*}\" \
 "]
