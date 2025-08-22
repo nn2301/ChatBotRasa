@@ -1,25 +1,10 @@
-# Dockerfile.rasa
-FROM rasa/rasa:3.6.2-full
-
-# Giúp log flush ngay & tránh nhiều worker khiến Render khó detect port
-ENV PYTHONUNBUFFERED=1 \
-    SANIC_WORKERS=1
-
-USER root
-WORKDIR /app
-
-# Cài đúng phiên bản tương thích với Rasa 3.6.2
-RUN pip install --no-cache-dir "pymongo[srv,tls]==4.3.3"
-
-# Copy project (domain.yml, config.yml, endpoints.yml, credentials.yml, models/, data/, ...)
-COPY . /app
-
-# Entrypoint server
+# Dockerfile.rasa (phần cuối)
 COPY server-entrypoint.sh /app/server-entrypoint.sh
 RUN chmod +x /app/server-entrypoint.sh && chown -R 1001:0 /app
 
 EXPOSE 8080
 USER 1001
 
-# Dùng shell script để strip ngoặc & chạy rasa run
-CMD ["/app/server-entrypoint.sh"]
+# Ghi đè ENTRYPOINT của base image
+ENTRYPOINT ["/app/server-entrypoint.sh"]
+# Không cần CMD nữa
