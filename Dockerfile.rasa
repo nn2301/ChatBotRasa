@@ -1,20 +1,17 @@
-# Dockerfile.rasa
-FROM rasa/rasa:3.6.2-full
+# Dockerfile.rasa (phần đầu)
+FROM rasa/rasa:3.6.2   # <-- bỏ "-full"
 
 USER root
 WORKDIR /app
-
-# Copy toàn bộ project (domain.yml, config.yml, endpoints.yml, models/, ...)
 COPY . /app
 
-# (Không cần cài thêm pymongo vì base image đã có đúng range Rasa yêu cầu)
-# Nếu bạn đang cài thêm gì khác, giữ lại nhưng KHÔNG nâng pymongo > 4.3.x
+# (Tùy) CHỈ cài đúng lib bạn cần (đừng cài spacy / transformers / tensorflow)
+# RUN pip install --no-cache-dir <thu-vien-ban-can> 
 
-# Entrypoint script
 COPY server-entrypoint.sh /app/server-entrypoint.sh
 RUN chmod +x /app/server-entrypoint.sh && chown -R 1001:0 /app
 
+ENV RASA_TELEMETRY_ENABLED=false PYTHONUNBUFFERED=1
 EXPOSE 8080
 USER 1001
-
 ENTRYPOINT ["/app/server-entrypoint.sh"]
