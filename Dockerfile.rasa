@@ -4,11 +4,17 @@ FROM rasa/rasa:3.6.2-full
 USER root
 WORKDIR /app
 
-# Copy toàn bộ project (domain.yml, config.yml, endpoints.yml, models/, ...)
+# Copy toàn bộ project
 COPY . /app
 
 EXPOSE 8080
 USER 1001
 
-# ENTRYPOINT của base image là ["rasa"], nên CMD dưới đây = "rasa run ..."
-CMD ["run", "--enable-api", "--cors", "*", "--host", "0.0.0.0", "-p", "8080"]
+# ENTRYPOINT của base image là ["rasa"]
+CMD ["run",
+     "--enable-api",
+     "--cors", "*",
+     "-i", "0.0.0.0",
+     "-p", "8080",
+     "--endpoints", "endpoints.yml",
+     "--credentials", "credentials.yml"]
