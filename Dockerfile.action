@@ -4,21 +4,21 @@ FROM rasa/rasa-sdk:3.6.2
 USER root
 WORKDIR /app
 
-# Cài deps riêng của actions (nếu có)
+# (optional) deps cho actions
 COPY actions/requirements.txt /app/actions/requirements.txt
 RUN if [ -f /app/actions/requirements.txt ]; then \
       pip install --no-cache-dir -r /app/actions/requirements.txt ; \
     fi
 
-# Copy source actions
+# mã nguồn actions
 COPY actions/ /app/actions
 
-# Thêm entrypoint để xử lý env & khởi động
+# entrypoint
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh && chown -R 1001:0 /app
 
 EXPOSE 8080
 USER 1001
 
-# Dùng shell/entrypoint để bind theo $PORT (Render set), default 8080
+# chạy bằng entrypoint (đọc env PORT của Render)
 CMD /app/entrypoint.sh
