@@ -1,9 +1,21 @@
-FROM rasa/rasa-sdk:3.6.21
+# Dockerfile.action
+FROM rasa/rasa-sdk:3.6.2
+
 USER root
 WORKDIR /app
+
+# Cài dependencies cho custom actions (tuỳ nhu cầu của bạn)
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copy source actions
 COPY actions/ /app/actions
-EXPOSE 8080
+
+# Action server mặc định cổng 5055 (khớp endpoints.yml)
+EXPOSE 5055
+
+# Chạy bằng user không root
 USER 1001
-CMD ["start", "--actions", "actions", "--port", "8080"]
+
+# Start action server
+CMD ["start", "--actions", "actions", "--port", "5055"]

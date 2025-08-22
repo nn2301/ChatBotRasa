@@ -21,9 +21,8 @@ pipeline:
   ambiguity_threshold: 0.1
 
 policies:
-  - name: MemoizationPolicy
-  - name: RulePolicy
-  - name: TEDPolicy
-    epochs: 100
-
-assistant_id: 20250624-173513-vibrant-osprey
+- name: MemoizationPolicy
+- name: RulePolicy
+- name: TEDPolicy
+  epochs: 100
+assistant_id: 20250822-165321-excited-pile

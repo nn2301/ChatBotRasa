@@ -1,19 +1,27 @@
+# Dockerfile.rasa
 FROM rasa/rasa:3.6.2
+
 WORKDIR /app
 COPY . /app
 
+# Mặc định Rasa serve ở 8080 (giữ để khớp hạ tầng hiện tại)
 EXPOSE 8080
 ENTRYPOINT []
 
+# Cho phép chỉ định model cụ thể khi build/run
 ARG MODEL_FILE=
 ENV MODEL_FILE=${MODEL_FILE}
 
+# Khi container khởi động:
+# - Nếu chưa có model .tar.gz trong /app/models thì train mới
+# - Sau đó chạy rasa run với model mới nhất
 CMD ["/bin/bash","-lc","\
   set -euo pipefail; \
   echo '--- Listing /app/models'; \
   ls -lah /app/models || true; \
   if ! ls /app/models/*.tar.gz >/dev/null 2>&1; then \
-    echo 'ERROR: No model .tar.gz found in /app/models'; exit 1; \
+    echo 'No model tar.gz found. Training fresh model with Rasa 3.6.2...'; \
+    rasa train || { echo 'Training failed'; exit 1; }; \
   fi; \
   MODEL_TO_LOAD=${MODEL_FILE:-$(ls -1t /app/models/*.tar.gz | head -n1)}; \
   echo Using model: $MODEL_TO_LOAD; \
