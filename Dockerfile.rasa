@@ -1,26 +1,19 @@
-# Dockerfile.rasa
+# Dockerfile.rasa (đề xuất)
 FROM rasa/rasa:3.6.2-full
 
-# Làm việc với quyền root cho các bước cài đặt
 USER root
 WORKDIR /app
 
-# Cài đúng bản pymongo tương thích với Rasa 3.6.2
+# CÀI pymongo đúng phiên bản cho Rasa 3.6.2
 RUN pip install --no-cache-dir "pymongo[srv,tls]==4.3.3"
 
-# Copy toàn bộ project (domain.yml, config.yml, endpoints.yml, credentials.yml, models/, v.v.)
+# Copy code (domain.yml, config.yml, endpoints.yml, credentials.yml, models/, ...)
 COPY . /app
 
-# Copy entrypoint riêng & set quyền thực thi (đặt sau để chắc chắn giữ được executable bit)
+# Entrypoint
 COPY server-entrypoint.sh /app/server-entrypoint.sh
 RUN chmod +x /app/server-entrypoint.sh && chown -R 1001:0 /app
 
-# Rasa lắng nghe theo biến PORT của Render (mặc định mình sẽ dùng 8080)
 EXPOSE 8080
-
-# Chạy bằng user không đặc quyền
 USER 1001
-
-# Quan trọng: Ghi đè ENTRYPOINT mặc định ["rasa"] của image gốc
 ENTRYPOINT ["/app/server-entrypoint.sh"]
-# Không cần CMD

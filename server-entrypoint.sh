@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-# Strip ngoặc kép nếu MONGO_URI kiểu "mongodb+srv://..."
+# Strip quotes nếu MONGO_URI như "mongodb+srv://..."
 if [[ "${MONGO_URI}" == \"*\" ]]; then
   export MONGO_URI=${MONGO_URI%\"}
   export MONGO_URI=${MONGO_URI#\"}
 fi
 
-# PORT của Render (fallback 8080)
 : "${PORT:=8080}"
+
+MODEL_PATH=${RASA_MODEL_PATH:-models/20250822-165338-charitable-pilot.tar.gz}
 
 echo "Starting Rasa server on 0.0.0.0:${PORT} ..."
 exec rasa run \
@@ -17,4 +18,6 @@ exec rasa run \
   -i 0.0.0.0 \
   -p "${PORT}" \
   --endpoints endpoints.yml \
-  --credentials credentials.yml
+  --credentials credentials.yml \
+  --model "${MODEL_PATH}" \
+  --log-level INFO
