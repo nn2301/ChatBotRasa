@@ -13,11 +13,11 @@ RUN if [ -f /app/actions/requirements.txt ]; then \
 # Copy source actions
 COPY actions/ /app/actions
 
-# Action server dùng cổng chuẩn 5055
-EXPOSE 5055
+# Action server dùng cổng chuẩn 8080
+EXPOSE 8080
 
 # Chạy bằng non-root
 USER 1001
 
 # Start action server
-CMD ["start", "--actions", "actions", "--port", "5055"]
+CMD ["start", "--actions", "actions", "--port", "8080"]
