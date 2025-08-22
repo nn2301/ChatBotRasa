@@ -4,17 +4,19 @@ FROM rasa/rasa-sdk:3.6.2
 USER root
 WORKDIR /app
 
-# Cài dependencies cho custom actions (tuỳ nhu cầu của bạn)
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Chỉ cài dependencies cho actions (KHÔNG dùng requirements.txt ở gốc)
+COPY actions/requirements.txt /app/actions/requirements.txt
+RUN if [ -f /app/actions/requirements.txt ]; then \
+      pip install --no-cache-dir -r /app/actions/requirements.txt ; \
+    fi
 
 # Copy source actions
 COPY actions/ /app/actions
 
-# Action server mặc định cổng 5055 (khớp endpoints.yml)
+# Action server dùng cổng chuẩn 5055
 EXPOSE 5055
 
-# Chạy bằng user không root
+# Chạy bằng non-root
 USER 1001
 
 # Start action server
