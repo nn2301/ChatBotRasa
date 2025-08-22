@@ -11,10 +11,4 @@ EXPOSE 8080
 USER 1001
 
 # ENTRYPOINT của base image là ["rasa"]
-CMD ["run",
-     "--enable-api",
-     "--cors", "*",
-     "-i", "0.0.0.0",
-     "-p", "8080",
-     "--endpoints", "endpoints.yml",
-     "--credentials", "credentials.yml"]
+CMD ["run","--enable-api","--cors","*","-i","0.0.0.0","-p","8080","--endpoints","endpoints.yml","--credentials","credentials.yml"]
