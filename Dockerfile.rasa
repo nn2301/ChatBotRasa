@@ -1,14 +1,20 @@
 # Dockerfile.rasa
 FROM rasa/rasa:3.6.2-full
 
+ENV PYTHONUNBUFFERED=1 \
+    SANIC_WORKERS=1
+
 USER root
 WORKDIR /app
 
-# Copy toàn bộ project
+# Chỉ cài những gì server cần thêm (đừng cài rasa/rasa-sdk lại)
+RUN pip install --no-cache-dir pymongo==4.7.2
+
+# Copy project (domain.yml, config.yml, endpoints.yml, credentials.yml, models/, data/, ...)
 COPY . /app
 
 EXPOSE 8080
 USER 1001
 
-# ENTRYPOINT của base image là ["rasa"]
+# ENTRYPOINT của base image là ["rasa"] -> lệnh dưới = "rasa run ..."
 CMD ["run","--enable-api","--cors","*","-i","0.0.0.0","-p","8080","--endpoints","endpoints.yml","--credentials","credentials.yml"]
