@@ -4,11 +4,11 @@ FROM rasa/rasa:3.6.2-full
 USER root
 WORKDIR /app
 
-# Copy toàn bộ project (nếu bạn build model riêng thì chỉnh lại cho phù hợp)
+# Copy toàn bộ project (domain.yml, config.yml, endpoints.yml, models/, ...)
 COPY . /app
 
 EXPOSE 8080
 USER 1001
 
-# Dùng shell form để đọc $PORT từ Render (fallback 8080)
-CMD run --enable-api --cors "*" --host 0.0.0.0 -p ${PORT:-8080}
+# ENTRYPOINT của base image là ["rasa"], nên CMD dưới đây = "rasa run ..."
+CMD ["run", "--enable-api", "--cors", "*", "--host", "0.0.0.0", "-p", "8080"]
