@@ -1,19 +1,20 @@
-# Dockerfile.rasa (đề xuất)
+# Dockerfile.rasa
 FROM rasa/rasa:3.6.2-full
 
 USER root
 WORKDIR /app
 
-# CÀI pymongo đúng phiên bản cho Rasa 3.6.2
-RUN pip install --no-cache-dir "pymongo[srv,tls]==4.3.3"
-
-# Copy code (domain.yml, config.yml, endpoints.yml, credentials.yml, models/, ...)
+# Copy toàn bộ project (domain.yml, config.yml, endpoints.yml, models/, ...)
 COPY . /app
 
-# Entrypoint
+# (Không cần cài thêm pymongo vì base image đã có đúng range Rasa yêu cầu)
+# Nếu bạn đang cài thêm gì khác, giữ lại nhưng KHÔNG nâng pymongo > 4.3.x
+
+# Entrypoint script
 COPY server-entrypoint.sh /app/server-entrypoint.sh
 RUN chmod +x /app/server-entrypoint.sh && chown -R 1001:0 /app
 
 EXPOSE 8080
 USER 1001
+
 ENTRYPOINT ["/app/server-entrypoint.sh"]
