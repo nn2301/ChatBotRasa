@@ -1,0 +1,10 @@
+[
+  {
+    "name": "priceRange",
+    "pattern": "(\\bunder\\-500k\\b|\\bdưới\\ 500k\\b|\\bdưới\\ 500\\.000đ\\b|\\b500k\\-1m\\b|\\bkhoảng\\ 500k\\ tới\\ 1m\\b|\\bkhoảng\\ 500\\.000\\ tới\\ 1tr\\b|\\b1m\\-2m\\b|\\bkhoảng\\ 1m\\ tới\\ 2m\\b|\\bkhoảng\\ 1tr\\ tới\\ 2tr\\b|\\b2m\\-4m\\b|\\bover\\-4m\\b|\\btừ\\ 500k\\ đến\\ 1\\ triệu\\b|\\bkhoảng\\ 1\\ triệu\\ đến\\ 2\\ triệu\\b|\\b2\\ triệu\\ tới\\ 4\\ triệu\\b|\\btrên\\ 4\\ triệu\\b)"
+  },
+  {
+    "name": "color",
+    "pattern": "(\\bđen\\b|\\btrắng\\b|\\bxanh\\b|\\bhồng\\b|\\btím\\b|\\bnâu\\b|\\bxám\\b|\\bđỏ\\b|\\bbe\\b)"
+  }
+]

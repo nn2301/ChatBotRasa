@@ -1,5 +1,4 @@
-# Dockerfile.action
-FROM rasa/rasa-sdk:3.6.2
+FROM rasa/rasa-sdk:3.6.21
 USER root
 WORKDIR /app
 COPY requirements.txt /app/requirements.txt

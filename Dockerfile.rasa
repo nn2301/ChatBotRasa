@@ -1,16 +1,13 @@
-FROM rasa/rasa:3.6.2
+FROM rasa/rasa:3.6.21
 WORKDIR /app
 COPY . /app
 
 EXPOSE 8080
 ENTRYPOINT []
 
-# Tuỳ chọn: chỉ định model cụ thể qua build-arg hoặc env
-#   docker build --build-arg MODEL_FILE=models/20250722-211715-ivory-valance.tar.gz -t yourimg .
 ARG MODEL_FILE=
 ENV MODEL_FILE=${MODEL_FILE}
 
-# Start command
 CMD ["/bin/bash","-lc","\
   set -euo pipefail; \
   echo '--- Listing /app/models'; \

@@ -1,0 +1,13 @@
+{
+  "0": "affirm",
+  "1": "ask_about_us",
+  "2": "ask_contact_info",
+  "3": "ask_payment_methods",
+  "4": "ask_shipping_methods",
+  "5": "bot_challenge",
+  "6": "deny",
+  "7": "goodbye",
+  "8": "greet",
+  "9": "search_products",
+  "10": "show_more_products"
+}
