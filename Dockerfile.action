@@ -4,7 +4,7 @@ FROM rasa/rasa-sdk:3.6.2
 USER root
 WORKDIR /app
 
-# Chỉ cài dependencies cho actions (KHÔNG dùng requirements.txt ở gốc)
+# Cài deps riêng của actions (nếu có)
 COPY actions/requirements.txt /app/actions/requirements.txt
 RUN if [ -f /app/actions/requirements.txt ]; then \
       pip install --no-cache-dir -r /app/actions/requirements.txt ; \
@@ -13,11 +13,12 @@ RUN if [ -f /app/actions/requirements.txt ]; then \
 # Copy source actions
 COPY actions/ /app/actions
 
-# Action server dùng cổng chuẩn 8080
-EXPOSE 8080
+# Thêm entrypoint để xử lý env & khởi động
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh && chown -R 1001:0 /app
 
-# Chạy bằng non-root
+EXPOSE 8080
 USER 1001
 
-# Start action server
-CMD ["start", "--actions", "actions", "--port", "8080"]
+# Dùng shell/entrypoint để bind theo $PORT (Render set), default 8080
+CMD /app/entrypoint.sh

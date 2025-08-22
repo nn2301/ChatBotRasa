@@ -1,35 +1,14 @@
 # Dockerfile.rasa
-FROM rasa/rasa:3.6.2
+FROM rasa/rasa:3.6.2-full
 
+USER root
 WORKDIR /app
+
+# Copy toàn bộ project (nếu bạn build model riêng thì chỉnh lại cho phù hợp)
 COPY . /app
 
-# Mặc định Rasa serve ở 8080 (giữ để khớp hạ tầng hiện tại)
 EXPOSE 8080
-ENTRYPOINT []
+USER 1001
 
-# Cho phép chỉ định model cụ thể khi build/run
-ARG MODEL_FILE=
-ENV MODEL_FILE=${MODEL_FILE}
-
-# Khi container khởi động:
-# - Nếu chưa có model .tar.gz trong /app/models thì train mới
-# - Sau đó chạy rasa run với model mới nhất
-CMD ["/bin/bash","-lc","\
-  set -euo pipefail; \
-  echo '--- Listing /app/models'; \
-  ls -lah /app/models || true; \
-  if ! ls /app/models/*.tar.gz >/dev/null 2>&1; then \
-    echo 'No model tar.gz found. Training fresh model with Rasa 3.6.2...'; \
-    rasa train || { echo 'Training failed'; exit 1; }; \
-  fi; \
-  MODEL_TO_LOAD=${MODEL_FILE:-$(ls -1t /app/models/*.tar.gz | head -n1)}; \
-  echo Using model: $MODEL_TO_LOAD; \
-  rasa run \
-    --enable-api \
-    --credentials credentials.yml \
-    --endpoints endpoints.yml \
-    --model \"$MODEL_TO_LOAD\" \
-    -i 0.0.0.0 -p ${PORT:-8080} \
-    --cors \"${CORS_ORIGINS:-*}\" \
-"]
+# Dùng shell form để đọc $PORT từ Render (fallback 8080)
+CMD run --enable-api --cors "*" --host 0.0.0.0 -p ${PORT:-8080}
